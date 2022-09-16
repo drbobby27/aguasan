@@ -15,7 +15,7 @@ export default {
       { estrato: "Estrato 2", cargo_fijo: 3200, valor_metro: 350, subsidio: 30 },
       { estrato: "Estrato 3", cargo_fijo: 3900, valor_metro: 460, subsidio: 10 }
     ],
-    arrayEstratos: [],
+    cristianScript: [],
     opcionEstrato: null,
     metros: "",
     usuarios: [],
@@ -57,23 +57,29 @@ export default {
       this.opcionEstrato = '';
       this.idSelected = false;
 
-    },
+    },  
     agregarUsuario() {
       const filaCalculado = this.definirEstrato(this.usuario, this.opcionEstrato, this.metros);
-      this.usuarios.push({ ...filaCalculado });
-      this.reset();
-      console.log(this.usuarios)
-    },
+      this.usuarios.push({ ...filaCalculado })
 
-    ...mapActions(useFacturaStore, ["setFactura"]),
-
-  
-  }, 
-  consolidadoEstratos (){
-    this.arrayEstratos({
       
-    })
-  }  ,
+      const { cantMetros, total, estrato }  = { ...filaCalculado}
+     
+      this.cristianScript.push( cantMetros, total, estrato )
+
+      console.log('DATA' + this.cristianScript)
+
+      this.reset()
+      
+    },
+    ...mapActions(useFacturaStore, ["setFactura"]),
+    
+     recuperarDataEstrato() {
+        
+    
+  },
+  }, 
+  
   computed :{
       ...mapState(useFacturaStore, {
         miFactura:  "factura"
